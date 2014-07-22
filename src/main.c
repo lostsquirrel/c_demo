@@ -1,5 +1,4 @@
 int main() {
-	demo01100();
-	printf("xx\n");
+	demo05020_1();
 	return 0;
 }
