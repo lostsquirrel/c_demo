@@ -1,4 +1,5 @@
 int main() {
-	demo05020_1();
+	demo05040_1();
+
 	return 0;
 }
