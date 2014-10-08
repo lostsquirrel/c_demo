@@ -9,9 +9,10 @@ char *alloc(int n) { /* return pointer to n characters */
 	if (allocbuf + ALLOCSIZE - allocp >= n) { /* it fits */
 		allocp += n;
 		return allocp - n; /* old p */
-	} else
+	} else {
 		/* not enough room */
 		return 0;
+	}
 }
 
 void afree(char *p) /* free storage pointed to by p */
@@ -29,5 +30,6 @@ int strlen_2(char *s) {
 }
 
 void demo05040_1() {
-	printf("%ld\n", allocbuf - allocp);
+	printf("set full %d\n", alloc(10000));
+	printf("set out %d\n", alloc(10001));
 }
