@@ -1,50 +1,46 @@
 /*
  * demo.05.07.0.c
  *
- *  Created on: 2014年10月8日
+ *  Created on: 2014年10月10日
  *      Author: lisong
  */
-#include <stdio.h>
-#include <string.h>
-#define MAXLINES 5000 /* max #lines to be sorted */
-char *lineptr[MAXLINES]; /* pointers to text lines */
-int readlines(char *lineptr[], int nlines);
-void writelines(char *lineptr[], int nlines);
-void qsort(char *lineptr[], int left, int right);
-/* sort input lines */
-main() {
-	int nlines;
-	/* number of input lines read */
-	if ((nlines = readlines(lineptr, MAXLINES)) >= 0) {
-		qsort(lineptr, 0, nlines - 1);
-		writelines(lineptr, nlines);
-		return 0;
-	} else {
-		printf("error: input too big to sort\n");
-		return 1;
-	}
+
+static char daytab[][13] = {
+		{ 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 },
+		{ 0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 },
+		{ 0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 }
+	};
+int is_leap(int year) {
+	return (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
 }
-#define MAXLEN 1000 /* max length of any input line */
-int getline(char *, int);
-char *alloc(int);
-/* readlines: read input lines */
-int readlines(char *lineptr[], int maxlines) {
-	int len, nlines;
-	char *p, line[MAXLEN];
-	nlines = 0;
-	while ((len = getline(line, MAXLEN)) > 0)
-		if (nlines >= maxlines || p = alloc(len) == NULL)
-			return -1;
-		else {
-			line[len - 1] = '\0'; /* delete newline */
-			strcpy(p, line);
-			lineptr[nlines++] = p;
-		}
-	return nlines;
+
+/* day_of_year: set day of year from month & day */
+int day_of_year(int year, int month, int day) {
+	int i, leap;
+	leap = is_leap(year);
+	for (i = 1; i < month; i++)
+		day += daytab[leap][i];
+	return day;
 }
-/* writelines: write output lines */
-void writelines(char *lineptr[], int nlines) {
-	int i;
-	for (i = 0; i < nlines; i++)
-		printf("%s\n", lineptr[i]);
+
+/* month_day: set month, day from day of year */
+void month_day(int year, int yearday, int *pmonth, int *pday)
+{
+	int i, leap;
+	leap = is_leap(year);
+	for (i = 1; yearday > daytab[leap][i]; i++)
+		yearday -= daytab[leap][i];
+	*pmonth = i;
+	*pday = yearday;
+}
+
+void demo05070_1() {
+	int year = 2000;
+	int month = 8;
+	int day = 8;
+	int yearday = day_of_year(year, month, day);
+	printf("%d年%d月%d日是当年的第%d天    %d\n", year, month, day, yearday, is_leap(year));
+	year = 2014;
+	yearday = day_of_year(year, month, day);
+	printf("%d年%d月%d日是当年的第%d天    %d\n", year, month, day, yearday, is_leap(year));
 }
