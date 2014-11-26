@@ -4,6 +4,7 @@
  *  Created on: 2014年10月10日
  *      Author: lisong
  */
+#include<stdio.h>
 
 static char daytab[][13] = {
 		{ 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 },
