@@ -71,6 +71,9 @@ struct complex_struct div_complex(struct complex_struct z1, struct complex_struc
 
 int main(void) {
 
+
+	//编译不过
+
 	struct complex_struct z1 = { 3.0, 4.0 };
 	struct complex_struct z2 = z1;
 	z1 = z2;
