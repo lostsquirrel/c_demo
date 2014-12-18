@@ -1,7 +1,14 @@
 #include <stdio.h>
 #include <math.h>
 
-struct complex_struct { double x, y; };
+enum coordinate_type { 
+	RECTANGULAR, /*直角坐标图*/
+	POLAR /*极坐标图*/ 
+};
+struct complex_struct { 
+	enum coordinate_type t;
+	double x, y; 
+};
 
 void print_complex_struct(struct complex_struct z) {
 	if (z.y < 0)
@@ -41,6 +48,7 @@ double angle(struct complex_struct z) {
 
 struct complex_struct make_from_real_img(double x, double y) {
 	struct complex_struct z;
+	z.t = RECTANGULAR;
 	z.x = x;
 	z.y = y;
 	return z;
@@ -48,8 +56,9 @@ struct complex_struct make_from_real_img(double x, double y) {
 
 struct complex_struct make_from_mag_ang(double r, double A) {
 	struct complex_struct z;
-	z.x = r * cos(A);
-	z.y = r * sin(A);
+	z.t = POLAR;
+	z.x = r;
+	z.y = A;
 	return z;
 }
 
@@ -71,6 +80,10 @@ struct complex_struct div_complex(struct complex_struct z1, struct complex_struc
 
 int main(void) {
 
+
+	//极坐标打印成什么样式
+	//极坐标与直角坐标运算后应该返回哪个类型的坐标？
+	
 	struct complex_struct z1 = { 3.0, 4.0 };
 	struct complex_struct z2 = z1;
 	z1 = z2;
