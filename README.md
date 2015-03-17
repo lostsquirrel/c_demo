@@ -12,6 +12,13 @@
 <p>
 	src/linuxc <br />
 	<ul>
+		<li>程序设计入门—C语言 by 网易云课堂</li>
+		<li>coding in sublimetext compile with gcc at commandline</li>
+	</ul>
+</p>
+<p>
+	src/mooc_c_1 <br />
+	<ul>
 		<li>Linux C编程一站式学习 written by 宋劲杉(北京亚嵌教育研究中心)</li>
 		<li>coding in sublimetext compile with gcc at commandline</li>
 	</ul>
