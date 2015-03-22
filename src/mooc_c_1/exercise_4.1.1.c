@@ -4,123 +4,52 @@
 /*
 题目内容：
 
-你的程序要读入一个整数，范围是[-100000,100000]。然后，用汉语拼音将这个整数的每一位输出出来。
-如输入1234，则输出：
-    yi er san si
-注意，每个字的拼音之间有一个空格，但是最后的字后面没有空格。当遇到负数时，在输出的开头加上“fu”，如-2341输出为：
-    fu er san si yi
+我们认为2是第一个素数，3是第二个素数，5是第三个素数，依次类推。
+现在，给定两个整数n和m，0<n<=m<=200，你的程序要计算第n个素数到第m个素数之间所有的素数的和，包括第n个素数和第m个素数。
+
 输入格式:
-一个整数，范围是[-100000,100000]。
-
+两个整数，第一个表示n，第二个表示m。
 输出格式：
-表示这个整数的每一位数字的汉语拼音，每一位数字的拼音之间以空格分隔，末尾没有空格。
-输入样例：
--30
-输出样例：
-fu san ling
+一个整数，表示第n个素数到第m个素数之间所有的素数的和，包括第n个素数和第m个素数。
 
+输入样例：
+2 4 
+输出样例：
+15
 */
-void printN(int n) {
-	switch(n) {
-		case 0:
-		printf("%s", "ling");
-		break;
-		case 1:
-		printf("%s", "yi");
-		break;
-		case 2:
-		printf("%s", "er");
-		break;
-		case 3:
-		printf("%s", "san");
-		break;
-		case 4:
-		printf("%s", "si");
-		break;
-		case 5:
-		printf("%s", "wu");
-		break;
-		case 6:
-		printf("%s", "liu");
-		break;
-		case 7:
-		printf("%s", "qi");
-		break;
-		case 8:
-		printf("%s", "ba");
-		break;
-		case 9:
-		printf("%s", "jiu");
-		break;
+int isPrime(int x) {
+	int i;
+	if (x <= 1) {
+		return 0;
+	} else {
+		for ( i = 2; i <= sqrt(x); ++i) {
+			if (x % i == 0){
+				return 0;
+			}
+		}
+		return 1;
 	}
 	
 }
 
-int main(int argc, char const *argv[])
-{
-	int x, y, z;
-	scanf("%d", &x);
+int main(int argc, char const *argv[]) {
+	int m,n;
+	int count = 0;
+	int sum = 0;
+	scanf("%d", &m);
+	scanf("%d", &n);
 
-	if (x < 0) {
-		printf("%s", "fu ");
-		x = x * (-1);
-	} 
-	 if (x == 0) {
-		printf("%s", "ling");
-		return 0;
-	}
-	z = x;
-
-	int length = 0;
-	while (x > 0) {
-		x = x / 10;
-		length++;
-	}
-	x = z;
-	while(x >= 0) {
-		y = pow(10, length - 1);
-			// printf("%d,%d\n", x, y);
-		if (y == 0) break;
-		switch(x / y) {
-			case 0:
-			printf("%s", "ling");
-			break;
-			case 1:
-			printf("%s", "yi");
-			break;
-			case 2:
-			printf("%s", "er");
-			break;
-			case 3:
-			printf("%s", "san");
-			break;
-			case 4:
-			printf("%s", "si");
-			break;
-			case 5:
-			printf("%s", "wu");
-			break;
-			case 6:
-			printf("%s", "liu");
-			break;
-			case 7:
-			printf("%s", "qi");
-			break;
-			case 8:
-			printf("%s", "ba");
-			break;
-			case 9:
-			printf("%s", "jiu");
-			break;
+	int i = 2;
+	while (count <= 200 ) {
+		if (isPrime(i)) {
+			count++;
+			if (count >= m && count <= n) {
+				sum += i;
+				// printf("%d\n", i);
+			}
 		}
-		
-		if (y > 1) {
-			printf("%s", " ");
-		}
-		x = x % y;
-		length--;
+		i++;
 	}
-	// printf("%d\n", length);
-	printf("%s\n", "");
+	printf("%d\n", sum);	
 	return 0;
 }
