@@ -48,7 +48,7 @@ int main(int argc, char const *argv[]) {
 
 	char **const p3; /*both pointer should be changed*/
 
-	p3 = &j; /*assignment of read-only variable ‘p3’*/  /*cannot be continued*/
+	// p3 = &j; /*assignment of read-only variable ‘p3’*/  /*cannot be continued*/
 	printf("p3 = %p\n", p3);
 	// p3++;
 	printf("p3 = %p\n", p3);
