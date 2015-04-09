@@ -13,4 +13,5 @@ int main(void) {
 	unsigned int b = 0u;
 	printf("max unsigned int is %u \n", b - 1);
 
+	return 0;
 }
